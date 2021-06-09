@@ -39,13 +39,23 @@ Board.DIRS = [
  * Checks if a given position is on the Board.
  */
 Board.prototype.isValidPos = function (pos) {
+  if (pos[0] >= 0 && pos[0] < 8 && pos[1] >= 0 && pos[1] < 8)
+    return true
+  else
+    return false
 };
 
 /**
  * Returns the piece at a given [x, y] position,
  * throwing an Error if the position is invalid.
  */
+//= row , cow 
 Board.prototype.getPiece = function (pos) {
+  let row = pos[0]
+  let col = pos[1]
+  if (this.isValidPos(pos)) {
+    return this.grid[row][col];}
+    throw new Error("Not valid pos!")
 };
 
 /**
@@ -53,12 +63,17 @@ Board.prototype.getPiece = function (pos) {
  * matches a given color.
  */
 Board.prototype.isMine = function (pos, color) {
+  if (this.isOccupied(pos)){
+    return this.getPiece(pos).color === color;
+  }
+    return false
 };
 
 /**
  * Checks if a given position has a piece on it.
  */
 Board.prototype.isOccupied = function (pos) {
+  return !!this.getPiece(pos) ;
 };
 
 /**
@@ -75,6 +90,7 @@ Board.prototype.isOccupied = function (pos) {
  * Returns empty array if no pieces of the opposite color are found.
  */
 Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
+  
 };
 
 /**
